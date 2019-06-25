@@ -1,0 +1,28 @@
+<h1>My App List</h1>
+<mat-card>
+  <div *ngIf="posts.length > 0">
+    <mat-list role="list" *ngFor="let post of posts" >
+      <mat-card>
+        <span class=post-image>
+            <img [src]='post.imgDir' [alt]='post.title'>
+        </span>
+          <mat-list-item role="listitem">{{post.title}}</mat-list-item>
+          <mat-list-item role="listitem">{{post.description}}</mat-list-item>
+        <mat-action-row>
+          <button  *ngIf="!mode"
+          mat-button
+          color='primary'
+          [routerLink]="['/edit', post.appId]">Edit</button>
+          <button *ngIf="!mode"
+          mat-button
+          color='warn'
+          (click)='onDelete(post.appId)'>Delete</button>
+          <button
+          mat-button
+          (click)='onGoTo(post)'>Go To</button>
+        </mat-action-row>
+      </mat-card>
+    </mat-list>
+  </div>
+  <p class='mat-body-1' *ngIf="posts.length <= 0">There are no packages calculated</p>
+</mat-card>

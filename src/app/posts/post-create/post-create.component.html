@@ -1,0 +1,50 @@
+<h2>Create Post</h2>
+<mat-card>
+  <form [formGroup]='form' (submit)='onSavePost()'>
+    <mat-form-field>
+      <input
+        matInput
+        type='text'
+        formControlName="title"
+        placeholder="Title">
+        <mat-error *ngIf="form.get('title').invalid">Please add a title</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        rows='4'
+        formControlName="description"
+        placeholder="Description"></textarea>
+        <mat-error *ngIf="form.get('description').invalid">Please add a description</mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-stroked-button type='button' (click)='filePicker.click()'>Pick Image</button>
+      <input type='file' #filePicker (change)='onImagePicked($event)'>
+    </div>
+    <div class='image-preview' *ngIf="imagePreview !== '' && imagePreview && form.get('imgDir').valid">
+      <img [src]='imagePreview' [alt]='form.value.title'>
+    </div>
+    <mat-form-field>
+      <input
+        matInput
+        type='text'
+        formControlName="androidUrl"
+        placeholder="Android Link">
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type='text'
+        formControlName="iosUrl"
+        placeholder="IOS Link">
+    </mat-form-field>
+    <br>
+    <p>*link should write like www._____.com</p>
+    <button
+      mat-raised-button
+      color='primary'
+      type='submit'>Save</button>
+  </form>
+</mat-card>
+
+<app-post-list></app-post-list>
